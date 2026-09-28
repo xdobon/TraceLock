@@ -1,0 +1,871 @@
+</style>
+</head>
+<body>
+
+<header>
+  <div class="barra">
+    <div class="identidad">
+      <svg viewBox="0 0 83 63" role="img" aria-label="TraceLock">
+        <g transform="translate(3.5,3.5)" fill="none" stroke="var(--logotype-border)" stroke-width="7"
+           stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 0h-14v56h14"/><path d="M62 0h14v56h-14"/>
+        </g>
+        <g transform="translate(3.5,3.5)">
+          <circle cx="22" cy="28" r="4" fill="var(--logotype-dot-default)"/>
+          <circle cx="38" cy="28" r="5.5" fill="var(--logotype-dot-focus)"/>
+          <circle cx="54" cy="28" r="4" fill="var(--logotype-dot-default)"/>
+        </g>
+      </svg>
+      <span class="nombre">TraceLock</span>
+    </div>
+
+    <div class="caso-actual">
+      <span class="etiqueta-caso">Caso</span>
+      <span class="nombre-caso" id="caso-actual">sin abrir</span>
+      <button class="secundario btn-ico btn-xs" id="abrir" aria-label="Cambiar de caso" title="Cambiar de caso"><svg class="ic" aria-hidden="true"><use href="#ic-cambiar"/></svg></button>
+    </div>
+
+    <div class="der">
+      <div class="buscador">
+        <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-buscar"/></svg>
+        <input id="cab-buscar" placeholder="Buscar en el caso" autocomplete="off" aria-label="Buscar en el caso">
+        <div class="menu-lista oculto" id="cab-buscar-res" role="listbox"></div>
+      </div>
+      <div class="menu" id="menu-descargas">
+        <button class="secundario" id="btn-descargas" aria-haspopup="true" aria-expanded="false">
+          <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-exportar"/></svg>
+          Descargar
+          <svg class="ic ic-sm chevron" aria-hidden="true"><use href="#ic-nav-arrow-down"/></svg>
+        </button>
+        <div class="menu-lista oculto" id="lista-descargas" role="menu">
+          <div class="menu-grupo">Evidencias</div>
+          <button class="secundario" id="exp-custodia"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-link"/></svg>Acta de evidencias</button>
+      <button class="secundario" id="exp-custodiahist"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-guia"/></svg>Historial de transferencias</button>
+      <button class="secundario" id="exp-sello"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-documentar"/></svg>Generar sello externo</button>
+      <button class="secundario" id="imp-sello"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-verificar"/></svg>Verificar sello externo</button>
+      <input id="f-sello" type="file" accept="application/json,.json" hidden>
+      <div class="menu-grupo">Seguimiento</div>
+          <button class="secundario" id="exp-hitos"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-hitos"/></svg>Hitos</button>
+      <button class="secundario" id="exp-crono"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-cronologia"/></svg>Cronología</button>
+      <button class="secundario" id="exp-preg"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-preguntas-abiertas"/></svg>Preguntas</button>
+      <button class="secundario" id="exp-tt"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-total-timeline"/></svg>Total timeline</button>
+      <div class="menu-grupo">Expediente</div>
+          <button class="secundario" id="exp-registro"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-registro-actividad"/></svg>Registro</button>
+        </div>
+      </div>
+
+      <div class="menu" id="menu-usuario">
+        <button class="secundario" id="btn-usuario" aria-haspopup="true" aria-expanded="false">
+          <!-- PENDIENTE: «usuario» es un dibujo provisional (Iconoir: «user»); también lo usa la acción «Rol». -->
+          <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-usuario"/></svg>
+          <span id="btn-usuario-txt">Analista</span>
+          <svg class="ic ic-sm chevron" aria-hidden="true"><use href="#ic-nav-arrow-down"/></svg>
+        </button>
+        <div class="menu-lista oculto" id="lista-usuario" role="menu">
+          <div class="menu-grupo">Identidad</div>
+          <!-- El nombre del analista ya no se escribe aquí: se pide al abrir o crear un caso
+               (identificarAnalista). El campo oculto lo conserva para el resto de la aplicación. -->
+          <input type="hidden" id="analista">
+          <datalist id="lista-analistas"></datalist>
+          <label class="campo menu-campo"><span>Entidad afectada</span>
+            <input id="cliente" list="lista-clientes" placeholder="Cliente del caso" autocomplete="off">
+            <datalist id="lista-clientes"></datalist></label>
+          <div class="menu-grupo">Consola</div>
+          <button class="secundario" id="btn-ajustes">Ajustes</button>
+          <button class="secundario" id="btn-guia">Guía y capacidades</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sello">
+    <div class="estado"><i class="pip" id="pip"></i><span id="estado-cadena">Sin carpeta abierta</span></div>
+    <div>Sello: <code id="sello">—</code></div>
+    <div class="sub">Anclaje externo: <b id="sello-externo">no cargado</b></div>
+    <div class="sub verif-estado oculto" id="verif-estado" role="status" aria-live="polite"
+      title="Ir a Evidencias"></div>
+    <div class="sub" id="carpeta"></div>
+  </div>
+</header>
+
+<div class="aviso oculto" id="aviso-soporte"></div>
+
+<div class="marco">
+  <nav aria-label="Secciones del expediente">
+    <div class="nav-cab">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Contraer menú" aria-expanded="true">
+        <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-nav-arrow-left"/></svg>
+      </button>
+    </div>
+    <div class="nav-scroll">
+      <div class="nav-grupo"><span>Expediente</span></div>
+      <button data-v="db" aria-selected="true">Resumen</button>
+      <button data-v="cl" aria-selected="false">Clasificación</button>
+      <button data-v="at" aria-selected="false">MITRE ATT&amp;CK</button>
+      <div class="nav-grupo"><span>Coordinar</span></div>
+      <button data-v="cr" aria-selected="false">Cronología</button>
+      <button data-v="hi" aria-selected="false">Hitos</button>
+      <button data-v="pr" aria-selected="false">Preguntas abiertas</button>
+      <button data-v="no" aria-selected="false">Notas</button>
+      <button data-v="tt" aria-selected="false">Total timeline</button>
+      <div class="nav-grupo"><span>Investigar</span></div>
+      <button data-v="ev" aria-selected="false">Evidencias</button>
+      <button data-v="io" aria-selected="false">IOCs</button>
+      <button data-v="lb" aria-selected="false">Laboratorio</button>
+      <div class="nav-grupo"><span>Entregar</span></div>
+      <button data-v="ex" aria-selected="false">Exportar</button>
+      <button data-v="au" aria-selected="false">Registro de actividad</button>
+    </div>
+  </nav>
+<main>
+  <section class="trabajo">
+
+    <!-- ============ RESUMEN ============ -->
+    <div data-vista="db">
+      <h2 class="con-tip">Resumen del caso
+        <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-db" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-db">Todo lo de esta pantalla se calcula leyendo el registro del caso. No hay ningún dato que se introduzca aquí ni que se guarde desde aquí.</span></span></h2>
+      <p class="ayuda" id="db-sub"></p>
+      <div id="db"></div>
+    </div>
+
+    <!-- ============ EVIDENCIAS ============ -->
+    <div data-vista="ev" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">Registro de evidencias
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-ev" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-ev">Cada fichero se copia a evidencias/originales/ y se genera automáticamente una copia de trabajo en evidencias/trabajo/ mientras se calcula su SHA-256 por bloques. El alta queda anotada en el registro y no puede modificarse desde aquí.</span></span></h2>
+          <p class="ayuda ev-resumen" id="ev-resumen"></p></div>
+        <div id="ev-acciones"></div>
+      </div>
+
+      <div id="aviso-proteccion" class="oculto"></div>
+
+      <div class="tarjeta oculto" id="ev-form">
+        <div class="form-cab"><h3>Añadir evidencia</h3>
+          <button type="button" class="secundario btn-ico btn-sm" onclick="document.getElementById('ev-cancelar').click()" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button></div>
+        <div class="campo-zona">
+          <span>Evidencia<span class="obligatorio" aria-hidden="true">*</span></span>
+          <div class="zona" id="zona" tabindex="0" role="button" aria-label="Evidencia: arrastra aquí los ficheros o pulsa para seleccionarlos">
+            <b>Arrastra aquí los ficheros</b> o pulsa para seleccionarlos
+            <input type="file" id="fichero" multiple class="oculto">
+          </div>
+          <div class="lista-ficheros" id="ev-seleccion"></div>
+          <div class="progreso" id="progreso"><div></div></div>
+        </div>
+
+        <hr class="form-separador">
+        <h4 class="subtitulo-sm con-tip">Datos de adquisición
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-ev-adq" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-ev-adq">Se aplican a los ficheros que sueltes a continuación. Los campos marcados con * son los que TraceLock no puede deducir por sí mismo leyendo el fichero — sin ellos no se da de alta la evidencia. Lo que sí es deducible (huella, tamaño, tipo, fecha de modificación del propio fichero) se calcula solo y no se pregunta.</span></span></h4>
+        <div class="campos">
+          <label class="campo"><span>Origen de la evidencia</span>
+            <input id="ev-origen" placeholder="Equipo, sistema o persona de la que procede"></label>
+          <label class="campo"><span>Método de adquisición</span>
+            <input id="ev-metodo" list="lista-metodos" placeholder="Exportación desde SIEM, imagen con FTK, copia manual…">
+            <datalist id="lista-metodos"></datalist></label>
+          <label class="campo"><span>Adquirida por</span>
+            <input id="ev-adquirida-por" list="lista-analistas" placeholder="Quién la obtuvo del origen"></label>
+          <label class="campo"><span>Equipo o soporte</span>
+            <input id="ev-equipo" placeholder="Nombre de host, etiqueta o soporte"></label>
+          <label class="campo"><span>Ubicación</span>
+            <input id="ev-ubicacion" placeholder="Sede, sala, rack o región cloud"></label>
+          <label class="campo"><span>Fecha y hora de adquisición</span>
+            <input id="ev-adquirida-el" type="datetime-local"></label>
+          <label class="campo"><span>Testigo</span>
+            <input id="ev-testigo" placeholder="Segunda persona presente"></label>
+          <label class="campo"><span>Nº de serie o service tag</span>
+            <input id="ev-serie" placeholder="Identificador del soporte"></label>
+          <label class="campo"><span>Usuario del equipo</span>
+            <input id="ev-usuario" placeholder="Responsable o usuario habitual"></label>
+          <label class="campo"><span>Estado del sistema</span>
+            <select id="ev-estado-sistema">
+              <option value="">Sin indicar</option>
+              <option>Encendido y en producción</option>
+              <option>Encendido y aislado</option>
+              <option>Apagado</option>
+              <option>No aplica</option></select></label>
+          <label class="campo" style="grid-column:span 2"><span class="con-tip">SHA-256 declarado en origen
+            <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-ev-hash" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-ev-hash">Si indicas el hash de origen se coteja al dar de alta. Es lo que ata la copia al soporte original: la huella que calcula esta herramienta solo acredita que la copia no ha cambiado desde que entró aquí.</span></span></span>
+            <input id="ev-hash-origen" class="mono" placeholder="Huella que emitió la herramienta de adquisición"></label>
+        </div>
+        <div class="form-acciones">
+          <button class="primario" id="ev-add">Añadir</button>
+          <button class="secundario" id="ev-cancelar">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="tabla-ev"></div>
+      <div class="tarjeta" id="tarjeta-proteccion">
+        <h3>Dejar las evidencias en solo lectura</h3>
+        <p class="ayuda">El navegador no puede cambiar permisos del sistema de ficheros, así que esto no se
+          puede automatizar del todo: hace falta un paso manual fuera de TraceLock, y conviene hacerlo
+          justo después de cada alta, no dejarlo para el final de la sesión — cada fichero nuevo que se
+          añade queda de nuevo en lectura/escritura hasta que se repite este paso.</p>
+        <p class="ayuda" style="margin:16px 0 0">Elige el sistema operativo del equipo donde está la carpeta del caso:</p>
+
+        <div class="so-opciones" role="tablist" aria-label="Sistema operativo">
+          <button type="button" class="so-btn" role="tab" id="so-tab-win" aria-selected="false" aria-controls="so-win" data-so="win">
+            <svg class="ic" aria-hidden="true"><use href="#ic-os-windows"/></svg><span>Windows</span><i class="so-este oculto">este equipo</i></button>
+          <button type="button" class="so-btn" role="tab" id="so-tab-linux" aria-selected="false" aria-controls="so-linux" data-so="linux">
+            <svg class="ic" aria-hidden="true"><use href="#ic-os-linux"/></svg><span>Linux</span><i class="so-este oculto">este equipo</i></button>
+          <button type="button" class="so-btn" role="tab" id="so-tab-mac" aria-selected="false" aria-controls="so-mac" data-so="mac">
+            <svg class="ic" aria-hidden="true"><use href="#ic-os-macos"/></svg><span>macOS</span><i class="so-este oculto">este equipo</i></button>
+        </div>
+
+        <!-- ---------- Windows ---------- -->
+        <div class="so-panel oculto" id="so-win" role="tabpanel" aria-labelledby="so-tab-win">
+          <p class="ayuda so-paso"><b>Opción 1 · Desde el Explorador de Windows, sin ejecutar nada.</b>
+            Funciona aunque el equipo bloquee scripts o la consola de comandos.</p>
+          <ol class="ayuda so-lista">
+            <li>En la carpeta del caso, botón derecho sobre la carpeta <code>evidencias</code> y elige
+              <b>Propiedades</b>.</li>
+            <li>En la pestaña General, marca <b>Solo lectura (solo se aplica a los archivos de la carpeta)</b>
+              y pulsa Aceptar.</li>
+            <li>En el aviso que aparece, elige <b>Aplicar cambios a esta carpeta, subcarpetas y archivos</b>.</li>
+          </ol>
+          <p class="ayuda">Para comprobarlo, abre las propiedades de cualquier fichero de
+            <code>evidencias/originales</code>: debe aparecer marcado como solo lectura. Para revertirlo,
+            repite los pasos desmarcando la casilla.</p>
+
+          <p class="ayuda so-paso"><b>Opción 2 · Con un comando.</b> Más rápido si tu equipo permite abrir la consola.</p>
+          <ol class="ayuda so-lista">
+            <li>Abre la carpeta del caso en el Explorador de Windows.</li>
+            <li>Escribe <code>cmd</code> en la barra de direcciones y pulsa Enter.</li>
+            <li>Pega el comando en la ventana negra que se abre.</li>
+          </ol>
+          <pre class="crudo" id="cmd-proteger">attrib +R "evidencias\*" /S</pre>
+          <div class="so-botones">
+            <button class="secundario" id="copiar-attrib">Copiar el comando</button>
+            <button class="secundario" id="copiar-attrib-off">Copiar el de revertir</button>
+          </div>
+          <p class="ayuda">Para comprobarlo, <code>attrib "evidencias\*" /S</code>: cada línea debe empezar
+            por R. Revierte con el segundo comando solo si necesitas volver a escribir sobre una evidencia
+            ya protegida.</p>
+          <details class="plegable">
+            <summary>Scripts descargables, solo si tu equipo permite ejecutarlos</summary>
+            <p class="ayuda" style="margin:10px 0">Se descargan a Descargas y hay que moverlos <b>dentro de la
+              carpeta del caso</b> antes de ejecutarlos con doble clic. En equipos gestionados es habitual que
+              una directiva de seguridad bloquee los scripts descargados. Es un control intencionado: no
+              intentes saltártelo. Usa la opción 1 o 2, o pide a tu equipo de sistemas una excepción.</p>
+            <div class="so-botones">
+              <button class="secundario btn-sm" id="prot-win">proteger.cmd</button>
+              <button class="secundario btn-sm" id="desprot-win">desproteger.cmd</button>
+            </div>
+          </details>
+        </div>
+
+        <!-- ---------- Linux ---------- -->
+        <div class="so-panel oculto" id="so-linux" role="tabpanel" aria-labelledby="so-tab-linux">
+          <p class="ayuda so-paso"><b>Con un comando.</b> Quita el permiso de escritura a cada fichero de
+            <code>evidencias/</code>; las carpetas no se tocan, para que TraceLock pueda seguir leyéndolas
+            y dando de alta evidencias nuevas.</p>
+          <ol class="ayuda so-lista">
+            <li>Abre la carpeta del caso en el gestor de archivos, botón derecho en un espacio vacío y
+              elige <b>Abrir en una terminal</b>. Si no aparece, abre una terminal y escribe <code>cd </code>
+              seguido de la ruta de la carpeta del caso (puedes arrastrar la carpeta a la terminal).</li>
+            <li>Pega el comando y pulsa Enter. No pide contraseña: los ficheros son tuyos.</li>
+          </ol>
+          <pre class="crudo" id="cmd-proteger-linux">find evidencias -type f -exec chmod a-w {} +</pre>
+          <div class="so-botones">
+            <button class="secundario" id="copiar-nix-linux">Copiar el comando</button>
+            <button class="secundario" id="copiar-nix-off-linux">Copiar el de revertir</button>
+          </div>
+          <p class="ayuda">Para comprobarlo, <code>ls -lR evidencias</code>: cada fichero debe empezar por
+            <code>-r--r--r--</code>, sin ninguna <code>w</code>. Revierte con el segundo comando solo si necesitas
+            volver a escribir sobre una evidencia ya protegida.</p>
+          <details class="plegable">
+            <summary>Scripts descargables, solo si tu equipo permite ejecutarlos</summary>
+            <p class="ayuda" style="margin:10px 0">Muévelos <b>dentro de la carpeta del caso</b> y ejecútalos
+              con <code>sh proteger.sh</code>. Si tu equipo tiene una directiva que lo impide, usa el comando.</p>
+            <div class="so-botones">
+              <button class="secundario btn-sm" id="prot-nix">proteger.sh</button>
+              <button class="secundario btn-sm" id="desprot-nix">desproteger.sh</button>
+            </div>
+          </details>
+        </div>
+
+        <!-- ---------- macOS ---------- -->
+        <div class="so-panel oculto" id="so-mac" role="tabpanel" aria-labelledby="so-tab-mac">
+          <p class="ayuda so-paso"><b>Opción 1 · Desde el Finder, sin ejecutar nada.</b></p>
+          <ol class="ayuda so-lista">
+            <li>Abre <code>evidencias/originales</code> en el Finder y selecciona todos los ficheros (⌘A).</li>
+            <li>Pulsa <b>⌥⌘I</b> (Opción + Comando + I) para abrir el <b>Inspector</b>, que aplica los cambios a
+              todos los seleccionados a la vez.</li>
+            <li>Marca la casilla <b>Bloqueado</b>.</li>
+            <li>Repite en <code>evidencias/trabajo</code>.</li>
+          </ol>
+          <p class="ayuda">Para comprobarlo, los ficheros muestran un candado en su icono. Para revertirlo,
+            desmarca <b>Bloqueado</b> del mismo modo.</p>
+
+          <p class="ayuda so-paso"><b>Opción 2 · Con un comando.</b></p>
+          <ol class="ayuda so-lista">
+            <li>En el Finder, botón derecho sobre la carpeta del caso y elige <b>Servicios › Nuevo terminal en
+              la carpeta</b>. Si no aparece, abre Terminal, escribe <code>cd </code> y arrastra la carpeta del
+              caso a la ventana.</li>
+            <li>Pega el comando y pulsa Enter.</li>
+          </ol>
+          <pre class="crudo" id="cmd-proteger-mac">find evidencias -type f -exec chmod a-w {} +</pre>
+          <div class="so-botones">
+            <button class="secundario" id="copiar-nix-mac">Copiar el comando</button>
+            <button class="secundario" id="copiar-nix-off-mac">Copiar el de revertir</button>
+          </div>
+          <p class="ayuda">Para comprobarlo, <code>ls -lR evidencias</code>: cada fichero debe empezar por
+            <code>-r--r--r--</code>. Si también los bloqueaste desde el Finder, para revertir tendrás que
+            desmarcar <b>Bloqueado</b> además de ejecutar el comando de revertir.</p>
+          <details class="plegable">
+            <summary>Scripts descargables, solo si tu equipo permite ejecutarlos</summary>
+            <p class="ayuda" style="margin:10px 0">Muévelos <b>dentro de la carpeta del caso</b> y ejecútalos
+              con <code>sh proteger.sh</code> en Terminal.</p>
+            <div class="so-botones">
+              <button class="secundario btn-sm" id="prot-mac">proteger.sh</button>
+              <button class="secundario btn-sm" id="desprot-mac">desproteger.sh</button>
+            </div>
+          </details>
+        </div>
+
+        <p class="ayuda so-nota">La protección solo afecta a los ficheros que ya están en <code>evidencias/</code>:
+          TraceLock sigue escribiendo en el registro y dando de alta evidencias nuevas con normalidad.
+          Cuando la hayas aplicado, anótalo:</p>
+        <div style="margin-top:18px">
+          <button class="primario" id="confirmar-proteccion">Protección aplicada</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CLASIFICACIÓN ============ -->
+    <div data-vista="cl" class="oculto">
+      <div class="cab-pagina">
+        <div><h2>Clasificación del incidente</h2>
+          <p class="ayuda con-tip">Selecciona el marco de clasificación para tu incidente
+            <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+              aria-describedby="tip-cl" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+              <span class="tip-caja" role="tooltip" id="tip-cl">No todas las entidades se rigen por la misma clasificación, así que el incidente puede clasificarse en varios marcos a la vez y cada uno conserva su propia justificación e historial.</span></span></p></div>
+        <div id="marco-accion"></div>
+      </div>
+      <div>
+        <div class="conmutador conmutador-lg" role="group" aria-label="Marco de clasificación" id="marcos"></div>
+        <p class="ayuda" id="marco-pie" style="margin:16px 0 0"></p>
+      </div>
+      <div id="clasif"></div>
+    </div>
+
+    <!-- ============ HITOS ============ -->
+    <div data-vista="hi" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">Hitos del incidente
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-hi" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-hi">Las horas no se teclean: se fijan al iniciar y al finalizar el hito, y un hito pendiente no cuenta tiempo.</span></span></h2>
+          <p class="ayuda">Acciones de respuesta del equipo, organizadas por fase.</p></div>
+        <div id="hi-acciones"></div>
+      </div>
+      <div class="tarjeta oculto" id="hi-form">
+        <div class="form-cab"><h3>Añadir nuevo hito</h3>
+          <button type="button" class="secundario btn-ico btn-sm" onclick="cerrarForm('hi-form')" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button></div>
+        <div class="campos">
+          <label class="campo"><span>Fase</span><select id="hi-fase"></select></label>
+          <label class="campo"><span>Hito</span><input id="hi-hito" placeholder="Qué se va a hacer"></label>
+          <label class="campo"><span>Propietario</span><input id="hi-prop" placeholder="Quién lo ejecuta"></label>
+          <label class="campo"><span>Riesgo</span><select id="hi-riesgo">
+            <option>Bajo</option><option selected>Medio</option><option>Alto</option></select></label>
+          <label class="campo"><span>Estado</span><select id="hi-estado" required>
+            <option value="" disabled selected hidden>Selecciona</option>
+            <option value="iniciar">Iniciar ahora</option>
+            <option value="pendiente">Pendiente</option></select></label>
+          <label class="campo"><span>Notas</span><input id="hi-notas" placeholder="Opcional"></label>
+        </div>
+        <div class="form-acciones">
+          <button class="primario" id="hi-add">Añadir hito</button>
+          <button class="secundario" id="hi-cancelar">Cancelar</button>
+        </div>
+      </div>
+      <div id="tabla-hi"></div>
+      <div id="hi-eliminados"></div>
+    </div>
+
+    <!-- ============ CRONOLOGÍA ============ -->
+    <div data-vista="cr" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">Cronología del ataque
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-cr" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-cr">Los hechos no se borran: rectificar o eliminar deja constancia del motivo, y el hecho original sigue en el registro.</span></span></h2>
+          <p class="ayuda">Hechos observados en el incidente, ordenados por el momento en que ocurrieron, no por cuándo se registraron. Es la base de la línea temporal del informe.</p></div>
+        <div id="cr-acciones"></div>
+      </div>
+      <div class="tarjeta oculto" id="cr-form">
+        <div class="form-cab"><h3>Añadir hecho</h3>
+          <button type="button" class="secundario btn-ico btn-sm" onclick="cerrarForm('cr-form')" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button></div>
+        <div class="campos">
+          <label class="campo"><span>Fecha</span><input id="cr-fecha" type="date"></label>
+          <label class="campo"><span>Hora (inicio y fin opcional)</span>
+            <span class="horas"><input id="cr-hora-ini" type="time" step="60">
+            <span class="sep">a</span><input id="cr-hora-fin" type="time" step="60"></span></label>
+          <label class="campo"><span>Huso horario</span><select id="cr-zona">
+            <option>UTC</option><option>Local del sistema origen</option><option>Sin determinar</option></select></label>
+          <label class="campo"><span>Fuente de la evidencia</span><input id="cr-fuente" placeholder="Log, artefacto o sistema"></label>
+        </div>
+        <label class="campo"><span>Hecho observado</span>
+          <input id="cr-accion" placeholder="Qué ocurrió, sin valoraciones"></label>
+        <div class="form-acciones">
+          <button class="primario" id="cr-add">Añadir a la cronología</button>
+          <button class="secundario" id="cr-cancelar">Cancelar</button>
+        </div>
+      </div>
+      <div class="bloque-tabla">
+        <div style="display:flex;justify-content:flex-start">
+          <div class="conmutador" role="group" aria-label="Vista de la cronología">
+            <button id="cr-v-linea" aria-pressed="true">Línea de tiempo</button>
+            <button id="cr-v-tabla" aria-pressed="false">Tabla</button>
+          </div>
+        </div>
+        <div id="tabla-cr"></div>
+      </div>
+      <div id="cr-eliminados"></div>
+    </div>
+
+    <!-- ============ INDICADORES ============ -->
+    <div data-vista="io" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">IOCs
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-io" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-io">Se extraen automáticamente al analizar un correo; los añadidos a mano quedan marcados como tales.</span></span></h2>
+          <p class="ayuda">Indicadores observados en el incidente, con su rol, su valoración justificada y la evidencia de la que proceden.</p></div>
+        <div id="io-acciones"></div>
+      </div>
+      <div class="tarjeta oculto" id="io-form">
+        <div class="form-cab"><h3>Añadir IOC</h3>
+          <button type="button" class="secundario btn-ico btn-sm" onclick="document.getElementById('io-cancelar').click()" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button></div>
+        <p class="ayuda" style="margin:0 0 16px">Los IOCs añadidos a mano quedan marcados como tales para distinguirlos de los extraídos automáticamente.</p>
+        <div class="campos">
+          <label class="campo"><span>Tipo</span><select id="io-tipo" required></select></label>
+          <label class="campo" style="grid-column:span 2"><span>IOC</span>
+            <input id="io-valor" class="mono" placeholder="Sin neutralizar: escribe el valor real"></label>
+          <label class="campo"><span>Evidencia relacionada</span><input id="io-evidencia" placeholder="EV-0001"></label>
+          <label class="campo" style="grid-column:1/-1"><span>De dónde sale</span>
+            <textarea id="io-contexto" rows="3" placeholder="Evidencia, herramienta o fuente que lo respalda"></textarea></label>
+        </div>
+        <div class="form-acciones">
+          <button class="primario" id="io-add">Añadir</button>
+          <button class="secundario" id="io-cancelar">Cancelar</button>
+        </div>
+      </div>
+      <div class="bloque-tabla">
+        <div class="fila-mandos">
+          <span class="fila-mandos" id="io-mandos-tabla">
+            <input id="ioc-buscar" class="filtro" placeholder="Buscar IOC, evidencia o justificación"
+              style="min-width:250px">
+            <select id="ioc-estado" class="filtro">
+              <option value="">Todos los estados</option>
+              <option>Pendiente</option><option>Benigno</option>
+              <option>Sospechoso</option><option>Malicioso</option></select>
+            <span class="sub" id="ioc-cuenta"></span>
+          </span>
+          <div class="buscador buscador-pagina oculto" id="io-mandos-grafo">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-buscar"/></svg>
+            <input id="grafo-buscar" placeholder="Buscar un IOC" autocomplete="off" aria-label="Buscar un IOC"
+              role="combobox" aria-expanded="false" aria-controls="grafo-buscar-res">
+            <div class="menu-lista oculto" id="grafo-buscar-res" role="listbox"></div>
+          </div>
+          <div class="conmutador conmutador-lg" role="group" aria-label="Vista de los IOCs">
+            <button id="io-v-tabla" aria-pressed="true">Tabla</button>
+            <button id="io-v-grafo" aria-pressed="false">Grafo</button>
+          </div>
+        </div>
+        <div id="tabla-ioc"></div>
+        <div id="grafo" class="oculto"></div>
+      </div>
+    </div>
+
+    <!-- ============ PREGUNTAS ============ -->
+    <div data-vista="pr" class="oculto">
+      <div class="cab-pagina">
+        <div><h2>Preguntas abiertas</h2>
+          <p class="ayuda">Información pendiente de la entidad afectada, de proveedores o de otros equipos, con su destinatario y su antigüedad.</p></div>
+        <div id="pr-acciones"></div>
+      </div>
+      <div class="tarjeta oculto" id="pr-form">
+        <div class="form-cab"><h3>Añadir pregunta</h3>
+          <button type="button" class="secundario btn-ico btn-sm" onclick="cerrarForm('pr-form')" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button></div>
+        <div class="campos">
+          <label class="campo" style="grid-column:span 2"><span>Pregunta</span>
+            <input id="pr-texto" placeholder="Qué hace falta saber"></label>
+          <label class="campo"><span>Dirigida a</span><input id="pr-quien" placeholder="Persona, equipo o cliente"></label>
+        </div>
+        <div class="form-acciones">
+          <button class="primario" id="pr-add">Registrar pregunta</button>
+          <button class="secundario" id="pr-cancelar">Cancelar</button>
+        </div>
+      </div>
+      <div id="tabla-pr"></div>
+      <div id="pr-eliminados"></div>
+    </div>
+    <!-- ============ TOTAL TIMELINE ============ -->
+    <div data-vista="tt" class="oculto">
+      <h2 class="con-tip">Total timeline
+        <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-tt" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-tt">Todo lo ocurrido en el caso en un solo hilo secuencial: altas y verificaciones de evidencias, hitos y su seguimiento, entradas de cronología y preguntas. El orden es el del registro, es decir, cuándo se hizo cada cosa.</span></span></h2>
+      <div class="bloque-tabla">
+        <div class="fila-mandos">
+          <div class="menu-pagina" id="tt-menu-filtro">
+            <button class="secundario" id="tt-filtrar" aria-haspopup="true" aria-expanded="false">
+              <svg class="ic" aria-hidden="true"><use href="#ic-filter-list-circle"/></svg>Filtrar<i class="punto-filtro oculto" id="tt-filtro-activo" aria-hidden="true"></i>
+              <svg class="ic chevron" aria-hidden="true"><use href="#ic-nav-arrow-down"/></svg></button>
+            <div class="menu-lista menu-filtro oculto" id="tt-filtro-lista" role="dialog" aria-label="Filtrar el total timeline">
+              <div class="buscador">
+                <svg class="ic ic-sm" aria-hidden="true"><use href="#ic-buscar"/></svg>
+                <input id="tt-buscar" placeholder="Filtrar por texto" autocomplete="off" aria-label="Filtrar por texto">
+              </div>
+              <div class="menu-grupo">Categorías</div>
+              <span id="tt-filtros" style="display:flex;flex-direction:column;gap:2px"></span>
+            </div>
+          </div>
+          <div class="menu-pagina" id="tt-menu-orden">
+            <button class="secundario" id="tt-orden" aria-haspopup="menu" aria-expanded="false">
+              <svg class="ic" aria-hidden="true"><use href="#ic-ordenar"/></svg>Ordenar por
+              <svg class="ic chevron" aria-hidden="true"><use href="#ic-nav-arrow-down"/></svg></button>
+            <div class="menu-lista oculto" id="tt-orden-lista" role="menu" aria-label="Ordenar por">
+              <button class="secundario opcion-orden" role="menuitemradio" aria-checked="true" data-orden="desc">Más reciente<svg class="ic ic-sm ic-marca" aria-hidden="true"><use href="#ic-check"/></svg></button>
+              <button class="secundario opcion-orden" role="menuitemradio" aria-checked="false" data-orden="asc">Menos reciente<svg class="ic ic-sm ic-marca" aria-hidden="true"><use href="#ic-check"/></svg></button>
+            </div>
+          </div>
+          <div class="conmutador conmutador-lg" role="group" aria-label="Vista del total timeline">
+            <button id="tt-v-linea" aria-pressed="true">Línea de tiempo</button>
+            <button id="tt-v-tabla" aria-pressed="false">Tabla</button>
+          </div>
+        </div>
+        <div id="tabla-tt"></div>
+      </div>
+    </div>
+    <!-- ============ EXPORTAR ============ -->
+    <div data-vista="ex" class="oculto">
+      <div class="cab-pagina">
+        <div><h2>Exportar documentos</h2>
+          <p class="ayuda">Entregables generados a partir del expediente en el momento de la exportación.</p></div>
+        <div id="ex-acciones"></div>
+      </div>
+      <div class="rejilla" id="rejilla-export"></div>
+    </div>
+
+    <!-- ============ ATT&CK ============ -->
+    <div data-vista="at" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">Técnicas MITRE ATT&amp;CK
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-at" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-at">Puedes importar el catálogo oficial de ATT&amp;CK para tener autocompletado. Se usa solo en local y no se envía a ningún sitio.</span></span></h2>
+          <p class="ayuda">Correspondencia de la actividad observada con tácticas y técnicas ATT&amp;CK.</p></div>
+        <div id="at-acciones"></div>
+      </div>
+      <input type="file" id="att-fichero" accept=".json,application/json" class="oculto">
+      <div id="attack"></div>
+    </div>
+
+    <!-- ============ LABORATORIO ============ -->
+    <div data-vista="lb" class="oculto">
+      <h2 class="con-tip">Laboratorio
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-lb" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-lb">Las operaciones del laboratorio no se anotan en el registro. Si un resultado sostiene una conclusión, documéntalo en la cronología, en el seguimiento de un hito o en una nota.</span></span></h2>
+      <p class="ayuda">Herramientas de análisis local. Ningún dato sale del equipo, así que admite material sensible del caso.</p>
+      <div class="tarjeta">
+        <div class="lab-mando">
+          <label class="campo"><span>Evidencia</span>
+            <select id="lab-ev" onchange="labCargarEvidencia()"></select></label>
+          <label class="campo"><span>Qué quieres hacer</span>
+            <select id="lab-op" onchange="labDescribir()"></select></label>
+          <button class="primario" onclick="labEjecutarUI()">Ejecutar</button>
+        </div>
+        <p class="ayuda" id="lab-desc" style="margin:12px 0 0"></p>
+      </div>
+      <div id="lab-meta"></div>
+      <div id="lab-aviso"></div>
+      <div class="lab">
+        <div><label class="campo"><span>Entrada</span>
+          <textarea id="lab-in" placeholder="Pega aquí el texto, o carga una evidencia desde el desplegable"></textarea></label></div>
+        <div><label class="campo"><span>Resultado</span>
+          <textarea id="lab-out" readonly placeholder="Pulsa Ejecutar para ver el resultado"></textarea></label></div>
+      </div>
+    </div>
+
+    <!-- ============ BÚSQUEDA ============ -->
+    <div data-vista="bu" class="oculto">
+      <h2>Búsqueda en el expediente</h2>
+      <p class="ayuda">Busca a la vez en evidencias, indicadores, hitos, cronología, preguntas,
+        clasificación y registro. Puedes acotar por tipo escribiendo <code>tipo:evidencia</code> o
+        <code>tipo:indicador</code> junto a las palabras; todo se combina con «y».</p>
+      <div class="bloque-tabla">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <input id="bus-q" class="filtro" placeholder="Texto a buscar, o tipo:hito plazo"
+            style="min-width:340px;flex:1">
+          <span class="sub" id="bus-cuenta"></span>
+        </div>
+        <div id="bus-res"></div>
+      </div>
+    </div>
+
+    <!-- ============ REGISTRO DE ACTIVIDAD ============ -->
+    <div data-vista="au" class="oculto">
+      <h2>Registro de actividad</h2>
+      <p class="ayuda">Traza completa de las acciones realizadas en el caso. Es la base de la trazabilidad de evidencias y no admite edición.</p>
+      <div id="registro"><p class="ayuda">Abre una carpeta de caso para empezar.</p></div>
+    </div>
+
+    <!-- ============ GUÍA ============ -->
+    <div data-vista="gu" class="oculto">
+      <h2>Guía y capacidades</h2>
+      <p class="ayuda">Cómo se trabaja con TraceLock, qué puede hacer con qué condiciones y, sobre todo,
+        qué no debe esperarse de ella.</p>
+      <div id="guia"></div>
+    </div>
+
+    <!-- ============ NOTAS ============ -->
+    <div data-vista="no" class="oculto">
+      <div class="cab-pagina">
+        <div><h2 class="con-tip">Notas
+          <span class="tip"><button type="button" class="tip-btn" aria-label="Más información"
+          aria-describedby="tip-no" onclick="event.preventDefault()"><svg class="ic" aria-hidden="true"><use href="#ic-info-circle"/></svg></button>
+          <span class="tip-caja" role="tooltip" id="tip-no">El borrador solo se conserva en esta pestaña y se pierde al cerrarla. La nota guardada queda en el registro, con autor y hora.</span></span></h2>
+          <p class="ayuda">Captura de información durante llamadas y reuniones. Las notas guardadas forman parte del expediente y pueden trasladarse a cronología, hitos o preguntas.</p></div>
+        <div id="no-acciones"></div>
+      </div>
+
+      <div class="tarjeta oculto" id="no-form">
+        <div class="notas-cab">
+          <h3 style="margin:0">Borrador</h3>
+          <span class="sub" id="nota-estado">—</span>
+        </div>
+        <div class="borrador-caja">
+          <label class="campo"><span class="oculto">Borrador</span>
+            <textarea id="nota-borrador" rows="12"
+              placeholder="Escribe aquí mientras hablas. Sin preocuparte por el formato."></textarea></label>
+          <div class="borrador-acciones">
+            <button class="secundario btn-sm" onclick="notaMarcarHora()"><svg class="ic" aria-hidden="true"><use href="#ic-cronologia"/></svg>Marcar hora</button>
+            <button class="secundario btn-sm" onclick="notaVaciar()"><svg class="ic" aria-hidden="true"><use href="#ic-error"/></svg>Vaciar borrador</button>
+          </div>
+        </div>
+        <div class="form-acciones">
+          <button class="primario" onclick="notaGuardar()">Guardar como nota</button>
+          <button class="secundario" id="no-cancelar">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="notas-lista"></div>
+    </div>
+
+    <!-- ============ AJUSTES ============ -->
+    <div data-vista="aj" class="oculto">
+      <h2>Ajustes</h2>
+      <p class="ayuda">Preferencias de esta consola. Se conservan mientras esta pestaña siga abierta:
+        sobreviven a una recarga, pero al cerrarla vuelven a los valores por defecto. No viajan con la
+        carpeta del caso ni afectan a los documentos exportados. La única excepción es «Recordar la
+        carpeta del caso», que sí queda guardada en el navegador.</p>
+
+      <div class="tarjeta">
+        <h3>Idioma</h3>
+        <div class="opciones-aj" id="aj-idioma"></div>
+        <div class="aviso" style="margin:16px 0 0">El inglés cambia solo lo que se muestra: interfaz, ayudas,
+          diálogos y avisos. No se traducen los datos del caso ni lo que escriben los analistas, el
+          registro guarda siempre los valores originales, y los documentos exportados (Word, PDF y CSV)
+          siguen en español. Tenlo en cuenta antes de entregar un expediente a un destinatario que no
+          lea español.</div>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Reanudar el caso al recargar</h3>
+        <p class="ayuda">Al recargar la página, el navegador retira el permiso sobre la carpeta: es una
+          medida suya y no se puede evitar desde aquí, así que reanudar siempre costará al menos un clic.
+          Lo que sí puede hacer TraceLock es recordar <b>qué</b> carpeta era, para que ese clic sea aceptar
+          un aviso en vez de volver a buscarla.</p>
+        <label style="display:flex;gap:9px;align-items:flex-start;margin:14px 0 0">
+          <input type="checkbox" id="aj-reanudar" style="margin-top:3px">
+          <span>Recordar la carpeta del caso en este navegador
+            <span class="sub">Desactivado por defecto.</span></span></label>
+        <div class="aviso" style="margin:16px 0 0">Al abrir este fichero como <code>file://</code>, varios
+          navegadores comparten el almacenamiento entre documentos locales. Con esta opción activada, otro
+          HTML abierto en este mismo equipo podría llegar a leer el nombre de la carpeta del caso y provocar
+          un aviso de permiso sobre ella. Acceder de verdad seguiría exigiendo que alguien acepte ese aviso.
+          Si trabajas con expedientes sensibles en un equipo compartido, déjalo desactivado.</div>
+        <div style="margin-top:14px"><button class="secundario" id="aj-olvidar-carpeta">Olvidar la carpeta recordada</button></div>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Playbooks</h3>
+        <p class="ayuda">Los playbooks crean de golpe los hitos pendientes y las preguntas de un tipo de
+          caso. Además de los que vienen de serie puedes cargar los tuyos: descarga el ejemplo, edítalo
+          y vuelve a subirlo. Si uno propio usa el mismo nombre que uno de serie, lo sustituye. Los propios
+          se conservan mientras esta pestaña siga abierta: guarda el fichero para volver a cargarlo.</p>
+        <div id="aj-playbooks" style="margin-bottom:16px"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="secundario" onclick="ejemploPlaybooks()">Descargar ejemplo</button>
+          <button class="secundario" onclick="document.querySelector('#aj-pb-fichero').click()">Cargar playbooks</button>
+          <button class="secundario" onclick="quitarPlaybooks()">Quitar los propios</button>
+        </div>
+        <input type="file" id="aj-pb-fichero" accept=".json,application/json" class="oculto">
+      </div>
+
+      <div class="tarjeta">
+        <h3>Informes personalizados</h3>
+        <p class="ayuda">Puedes definir tus propios documentos combinando texto fijo, apartados para que
+          los rellene el analista y bloques de datos que la consola rellena sola. Aparecen como una
+          tarjeta más en Exportar, en Word y en PDF. Se conservan mientras esta pestaña siga abierta: guarda
+          el fichero para volver a cargarlo.</p>
+        <div id="aj-informes" style="margin-bottom:16px"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="secundario" onclick="ejemploInformes()">Descargar ejemplo</button>
+          <button class="secundario" onclick="document.querySelector('#aj-inf-fichero').click()">Cargar informes</button>
+          <button class="secundario" onclick="quitarInformes()">Quitar los propios</button>
+        </div>
+        <input type="file" id="aj-inf-fichero" accept=".json,application/json" class="oculto">
+        <details class="plegable" style="margin-top:16px">
+          <summary>Bloques de datos disponibles</summary>
+          <table style="margin-top:12px"><thead><tr><th style="width:180px">Identificador</th>
+            <th>Qué inserta</th></tr></thead><tbody id="aj-bloques"></tbody></table>
+        </details>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Autodiagnóstico</h3>
+        <p class="ayuda">Comprueba que esta copia del fichero funciona como debe: las huellas contra
+          los vectores publicados, el encadenado del registro, el escapado de los datos que vienen de
+          ficheros analizados, los lectores de formatos y los catálogos normativos. Las pruebas viajan
+          dentro del propio HTML, así que puedes ejecutarlas en cualquier equipo sin instalar nada y
+          antes de trabajar con un caso real.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <button class="primario" id="btn-autodiag">Ejecutar autodiagnóstico</button>
+          <button class="secundario" id="btn-autodiag-csv"><svg class="ic ic-sm" aria-hidden="true"><use href="#ic-csv"/></svg>Descargar resultado</button>
+        </div>
+        <div id="autodiag"></div>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Acerca de</h3>
+        <div id="aj-acerca"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<div id="modal-custodia" class="oculto" role="dialog" aria-modal="true" aria-label="Trazabilidad de la evidencia">
+  <div class="panel-caja modal-md">
+    <button type="button" class="secundario btn-ico modal-cerrar" id="custodia-cerrar" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button>
+    <div class="panel-cab"><div><h2>Trazabilidad de la evidencia</h2><div class="sub" id="custodia-evidencia"></div></div></div>
+    <div id="custodia-contenido"></div>
+  </div>
+</div>
+
+<div id="visor" class="oculto" role="dialog" aria-modal="true" aria-label="Prueba gráfica"></div>
+
+<div id="sincronia" class="oculto" role="status" aria-live="polite"></div>
+
+<div id="portada">
+  <div class="portada-caja">
+    <div class="portada-marca">
+      <svg viewBox="0 0 83 63" role="img" aria-label="TraceLock">
+        <g transform="translate(3.5,3.5)" fill="none" stroke="var(--logotype-border)" stroke-width="7"
+           stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 0h-14v56h14"/><path d="M62 0h14v56h-14"/>
+        </g>
+        <g transform="translate(3.5,3.5)">
+          <circle cx="22" cy="28" r="4" fill="var(--logotype-dot-default)"/>
+          <circle cx="38" cy="28" r="5.5" fill="var(--logotype-dot-focus)"/>
+          <circle cx="54" cy="28" r="4" fill="var(--logotype-dot-default)"/>
+        </g>
+      </svg>
+      <b>TraceLock</b>
+    </div>
+    <p class="ayuda">Gestión de incidentes y trazabilidad de evidencias. Todo el caso vive en una
+      carpeta de tu disco: evidencias identificadas, responsables, verificaciones, copias de trabajo y un
+      registro encadenado con sello externo opcional. No requiere backend.</p>
+
+    <button class="opcion reanudar oculto" id="p-reanudar">
+      <h3>Reanudar <span id="p-reanudar-nombre"></span></h3>
+      <p id="p-reanudar-pie"></p>
+    </button>
+
+    <div class="opciones">
+      <button class="opcion" id="p-abrir">
+        <h3>Abrir un caso</h3>
+        <p>Selecciona la carpeta de un caso ya existente. El estado se reconstruye entero leyendo su
+           registro, así que puedes retomarlo donde lo dejaste.</p>
+      </button>
+      <button class="opcion" id="p-crear">
+        <h3>Crear un caso</h3>
+        <p>Elige dónde guardarlo y responde unas preguntas. Se prepara la carpeta, se clasifica el
+           incidente y, si quieres, se cargan los hitos de una plantilla.</p>
+      </button>
+    </div>
+
+    <div class="portada-pie" id="portada-pie"></div>
+    <div class="portada-pie" id="portada-olvidar" style="border:0;padding-top:6px;margin-top:0"></div>
+  </div>
+</div>
+
+<div id="modal-pedir" class="oculto" role="dialog" aria-modal="true" aria-labelledby="pedir-titulo">
+  <div class="panel-caja modal-sm">
+    <button type="button" class="secundario btn-ico modal-cerrar" id="pedir-cerrar" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button>
+    <div class="panel-cab"><h2 id="pedir-titulo"></h2></div>
+    <p class="ayuda" id="pedir-nota" style="margin-top:12px"></p>
+    <div class="campos" id="pedir-campos" style="margin-top:10px"></div>
+    <div style="margin-top:18px;display:flex;gap:9px;justify-content:flex-end">
+      <button class="secundario" id="pedir-cancelar">Cancelar</button>
+      <button class="primario" id="pedir-aceptar">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-tr" class="oculto" role="dialog" aria-modal="true" aria-label="Transferencia de la evidencia">
+  <div class="panel-caja modal-sm">
+    <button type="button" class="secundario btn-ico modal-cerrar" id="tr-cerrar" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button>
+    <div class="panel-cab"><div><h2>Transferencia de la evidencia</h2>
+      <div class="sub" id="tr-evidencia"></div></div></div>
+    <div class="campos" style="margin-top:16px">
+      <label class="campo"><span>Entrega</span><input id="tr-de" readonly></label>
+      <label class="campo"><span>Recibe</span>
+        <input id="tr-a" list="lista-analistas" placeholder="Persona, equipo u organismo"></label>
+      <label class="campo"><span>Medio de entrega</span>
+        <select id="tr-medio">
+          <option>Entrega en mano</option>
+          <option>Soporte extraíble cifrado</option>
+          <option>Transferencia cifrada (SFTP, enlace seguro)</option>
+          <option>Correo electrónico cifrado</option>
+          <option>Depósito judicial o policial</option>
+          <option>Otro</option></select></label>
+      <label class="campo"><span>SHA-256 de la copia entregada</span>
+        <input id="tr-hash" class="mono" placeholder="Si se entrega una copia distinta"></label>
+      <label class="campo" style="grid-column:span 2"><span>Motivo</span>
+        <input id="tr-motivo" placeholder="Por qué se transfiere y para qué se va a usar"></label>
+      <label class="campo" style="grid-column:span 2"><span>Observaciones</span>
+        <input id="tr-obs" placeholder="Precinto, referencia de envío, acta asociada…"></label>
+    </div>
+    <p class="ayuda" style="margin-top:6px">La transferencia se anota en el registro y no puede
+      deshacerse. Si te equivocas, registra la transferencia inversa explicando el error.</p>
+    <div style="margin-top:18px;display:flex;gap:9px;justify-content:flex-end">
+      <button class="secundario" id="tr-cancelar">Cancelar</button>
+      <button class="primario" id="tr-guardar">Registrar transferencia</button>
+    </div>
+  </div>
+</div>
+
+<div id="panel" class="oculto" role="dialog" aria-modal="true" aria-label="Análisis de correo">
+  <div class="panel-caja modal-lg">
+    <button type="button" class="secundario btn-ico modal-cerrar" id="panel-cerrar-x" aria-label="Cerrar" title="Cerrar"><svg class="ic" aria-hidden="true"><use href="#ic-close"/></svg></button>
+    <div id="panel-cuerpo"></div>
+    <div id="panel-pie" style="margin-top:22px;text-align:right">
+      <button class="secundario" id="panel-cerrar">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+

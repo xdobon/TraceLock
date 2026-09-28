@@ -1,0 +1,53 @@
+{
+  "format": "TraceLock-External-Anchor-v1",
+  "schema": 2,
+  "tool": "TraceLock 1.1",
+  "caseId": "CASE-5c725e52c3a644099767",
+  "caseName": "IR-2026-031-Phishing-Finanzas",
+  "generatedAt": "2026-09-10T15:30:00.000Z",
+  "events": 78,
+  "lastHash": "b0a02f97041e3ad03154c4c338b2dc81329f30cc671b39a356a95ff15ab0fee8",
+  "chainValid": true,
+  "evidenceCount": 4,
+  "evidence": [
+    {
+      "id": "EV-0001",
+      "nombre": "Factura_pendiente_septiembre.eml",
+      "bytes": 2316,
+      "sha256": "87746d66a7e9109dcd5c7bf816faf9213ef28bf4d475c9e634ba9b9d1218edcf",
+      "originalHash": "87746d66a7e9109dcd5c7bf816faf9213ef28bf4d475c9e634ba9b9d1218edcf",
+      "archivo": "originales/EV-0001__Factura_pendiente_septiembre.eml",
+      "custodio": "Luis Ortega (laboratorio de análisis)"
+    },
+    {
+      "id": "EV-0002",
+      "nombre": "signin-logs-entra-id.csv",
+      "bytes": 11679,
+      "sha256": "7c7fc8db9f993ca19359f3b283bf93400a806f024da0a6fcd701d15da70ad2b3",
+      "originalHash": "7c7fc8db9f993ca19359f3b283bf93400a806f024da0a6fcd701d15da70ad2b3",
+      "archivo": "originales/EV-0002__signin-logs-entra-id.csv",
+      "custodio": "Ana Martín"
+    },
+    {
+      "id": "EV-0003",
+      "nombre": "proxy_2026-09-09.log",
+      "bytes": 70633,
+      "sha256": "06be73dd75185562bf610c4a8365b20812ee09822be2e1b51721b61c676a169a",
+      "originalHash": "06be73dd75185562bf610c4a8365b20812ee09822be2e1b51721b61c676a169a",
+      "archivo": "originales/EV-0003__proxy_2026-09-09.log",
+      "custodio": "Ana Martín"
+    },
+    {
+      "id": "EV-0004",
+      "nombre": "captura_portal_falso.png",
+      "bytes": 238104,
+      "sha256": "406d4447395b49a30412e24aac7a26cbb391388e4beccc603090628bb63cc0d2",
+      "originalHash": "406d4447395b49a30412e24aac7a26cbb391388e4beccc603090628bb63cc0d2",
+      "archivo": "originales/EV-0004__captura_portal_falso.png",
+      "custodio": "Ana Martín"
+    }
+  ],
+  "anchorId": "ANC-77-8026b67216d1",
+  "anchorEvent": 78,
+  "anchorHash": "f0dbf332c99bbbf449719d9aef707179b02c6c96dc226214d0f0465bc1de5c11"
+}

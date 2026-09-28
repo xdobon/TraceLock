@@ -1,0 +1,13 @@
+TraceLock
+Copyright 2026 Xavier Dobon
+
+Este producto se distribuye bajo la Licencia Apache 2.0 (ver LICENSE).
+
+Incluye componentes de terceros, cada uno con su propia licencia:
+
+- Iconos de Iconoir (https://iconoir.com), Copyright (c) 2021 Luca Burgio.
+  Licencia MIT: src/iconos/LICENSE-iconoir.txt
+- Fuente Pliant, Copyright 2025 The Pliant Project Authors.
+  SIL Open Font License 1.1: src/fuentes/Pliant-OFL.txt
+- Fuente Azeret Mono, Copyright 2021 The Azeret Project Authors.
+  SIL Open Font License 1.1: src/fuentes/AzeretMono-OFL.txt

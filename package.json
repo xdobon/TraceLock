@@ -1,0 +1,23 @@
+{
+  "name": "tracelock",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Consola portátil local-first para gestión, documentación y trazabilidad de expedientes de respuesta a incidentes.",
+  "author": "Xavier Dobon",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node tests/run-autopruebas.js",
+    "test:i18n": "node tests/i18n-cobertura.js",
+    "test:ejemplo": "node tests/caso-ejemplo.js",
+    "test:todo": "npm run build && npm test && npm run test:i18n && npm run test:ejemplo",
+    "postinstall": "playwright install chromium",
+    "test:fuzz": "node tests/fuzz-formatos.js"
+  },
+  "devDependencies": {
+    "playwright": "1.56.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

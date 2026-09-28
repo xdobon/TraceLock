@@ -1,0 +1,9 @@
+TraceLock-External-Anchor-v1
+Case ID: CASE-5c725e52c3a644099767
+Case: IR-2026-031-Phishing-Finanzas
+Events: 78
+Last hash: b0a02f97041e3ad03154c4c338b2dc81329f30cc671b39a356a95ff15ab0fee8
+Anchor hash: f0dbf332c99bbbf449719d9aef707179b02c6c96dc226214d0f0465bc1de5c11
+Generated: 2026-09-10T15:30:00.000Z
+
+Store this file OUTSIDE the case folder. It is an external integrity anchor, not an authentication mechanism.

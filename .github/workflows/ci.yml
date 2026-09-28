@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Sin package-lock.json en el repositorio, «npm ci» fallaría. Playwright está fijado a una
+      # versión exacta en package.json. Cuando se suba un package-lock.json, volver a «npm ci».
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Descargar Chromium con sus dependencias del sistema
+        run: npx playwright install --with-deps chromium
+
+      - name: Construir tracelock.html
+        run: node build.js
+
+      - name: Ejecutar autopruebas embebidas en Chromium headless
+        run: npm test
+
+      - name: Comprobar la cobertura de la traducción al inglés
+        run: npm run test:i18n
+
+      - name: Comprobar el caso de ejemplo (cadena, huellas y sello)
+        run: npm run test:ejemplo
+
+      - name: Comprobar que tracelock.html corresponde a src/
+        run: |
+          git diff --exit-code -- tracelock.html \
+            || { echo '::error::tracelock.html no corresponde a src/. Ejecuta «node build.js» y súbelo.'; exit 1; }
+
+      - name: Publicar tracelock.html como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: tracelock-dist
+          path: tracelock.html

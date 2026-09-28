@@ -1,0 +1,40 @@
+{
+  "organizacion": "CSIRT de ejemplo",
+  "analistas": [
+    "Ana Martín",
+    "Luis Ortega"
+  ],
+  "clientes": [
+    "Entidad Ejemplo S.A."
+  ],
+  "fases": [
+    "Notificacion",
+    "Contencion",
+    "Analisis",
+    "Mitigacion",
+    "Recuperacion",
+    "Cierre"
+  ],
+  "riesgos": [
+    "Bajo",
+    "Medio",
+    "Alto"
+  ],
+  "metodosAdquisicion": [
+    "Exportacion desde SIEM",
+    "Exportacion desde EDR",
+    "Imagen forense de disco",
+    "Volcado de memoria",
+    "Descarga desde consola cloud",
+    "Copia manual facilitada por el cliente",
+    "Captura de trafico",
+    "Entregado por el cliente"
+  ],
+  "husos": [
+    "UTC",
+    "Europe/Madrid",
+    "America/Lima",
+    "Local del sistema origen",
+    "Sin determinar"
+  ]
+}

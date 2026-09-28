@@ -1,0 +1,9 @@
+# Todo el texto se guarda y se descarga con saltos de línea LF en cualquier sistema. Sin esto, Git en
+# Windows convierte a CRLF al descargar, y «node build.js» ya no generaría el mismo tracelock.html
+# byte a byte que el publicado (ver RELEASING.md). Los binarios (png, woff…) se detectan solos.
+* text=auto eol=lf
+
+# El caso de ejemplo se guarda byte a byte: si Git convirtiera los saltos de línea (CRLF en Windows),
+# las huellas SHA-256 de las evidencias y del registro dejarían de coincidir.
+ejemplos/IR-2026-031-Phishing-Finanzas/** -text
+ejemplos/sello-externo/** -text

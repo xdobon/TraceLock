@@ -1,0 +1,5 @@
+node_modules/
+# ficheros intermedios del generador del caso de ejemplo
+ejemplos/generador/fuente/
+# versión de desarrollo con el panel de colores: se genera con «node build.js», no se publica
+dist/
