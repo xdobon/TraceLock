@@ -14,18 +14,13 @@ verificarse de forma independiente.
    ```bash
    sha256sum tracelock.html
    ```
-4. Firma el checksum (GPG, o `cosign` si prefieres firma keyless):
-   ```bash
-   gpg --detach-sign --armor tracelock.html
-   # genera tracelock.html.asc
-   ```
+
 
 ## Al publicar el release en GitHub
 
 Adjunta como *release assets*, además del propio `tracelock.html`:
 
 - `tracelock.html.sha256` (salida de `sha256sum`, en texto plano)
-- `tracelock.html.asc` (firma GPG)
 
 Y en la descripción del release, incluye el hash en texto plano para que
 se pueda copiar sin descargar nada:
